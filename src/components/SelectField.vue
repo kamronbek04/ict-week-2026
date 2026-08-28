@@ -45,7 +45,7 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', onOutside))
         <path d="M4 6l4 4 4-4" stroke="#aeb6b6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
       </svg>
     </button>
-    <ul v-if="open" class="menu" role="listbox">
+    <ul v-if="open" class="menu" :class="{ scrollable: options.length > 8 }" role="listbox">
       <li v-for="opt in options" :key="opt">
         <button type="button" class="option" role="option" :aria-selected="isPicked(opt)" @click="pick(opt)">
           <span class="dot" :class="{ on: isPicked(opt) }"></span>
@@ -59,13 +59,15 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', onOutside))
 <style scoped>
 .field {
   position: relative;
+  min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .label {
-  font-size: 15px;
+  font-size: 14px;
+  line-height: 1.2;
   font-weight: 600;
 }
 
@@ -73,12 +75,26 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', onOutside))
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
   height: 46px;
   padding: 0 16px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
-  background: rgba(13, 24, 30, 0.85);
+  background: var(--glass-input);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   text-align: left;
+}
+
+.control > span {
+  min-width: 0;
+}
+
+.control > svg {
+  flex: none;
 }
 
 .placeholder {
@@ -108,8 +124,25 @@ onBeforeUnmount(() => document.removeEventListener('pointerdown', onOutside))
   padding: 6px 0;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
-  background: #0d181e;
+  background: rgba(7, 20, 25, 0.94);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+}
+
+.menu.scrollable {
+  max-height: 280px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: rgba(132, 255, 193, 0.45) transparent;
+  scrollbar-width: thin;
+}
+
+.menu.scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menu.scrollable::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(132, 255, 193, 0.45);
 }
 
 .option {

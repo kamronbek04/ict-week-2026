@@ -1,7 +1,6 @@
 <script setup>
 import panel from '../assets/hero-panel.webp'
-
-const posterUrl = import.meta.env.BASE_URL + 'hero-poster.webp'
+import poster from '../assets/hero-poster.webp'
 import scaling from '../assets/hero-scaling.webp'
 
 const countdown = [
@@ -23,7 +22,16 @@ const countdown = [
     </p>
     <div class="grid">
       <div class="video">
-        <img :src="posterUrl" alt="Aerial view of the ICT Week venue in Tashkent" width="771" height="491" fetchpriority="high" />
+        <img :src="poster" alt="Aerial view of the ICT Week venue in Tashkent" width="769" height="488" fetchpriority="high" />
+        <button type="button" class="play" aria-label="Play ICT Week video">
+          <span class="play-inner" aria-hidden="true">
+            <span class="play-core">
+              <svg width="13" height="14" viewBox="384.5 242.4 13 14" fill="none">
+                <path d="M385.149 249.362V244.467C385.149 242.98 386.758 242.049 388.048 242.791L392.313 245.243L396.56 247.685C397.853 248.429 397.853 250.295 396.56 251.039L392.313 253.481L388.048 255.933C386.758 256.675 385.149 255.744 385.149 254.257V249.362Z" fill="#121B26" />
+              </svg>
+            </span>
+          </span>
+        </button>
       </div>
       <aside class="panel">
         <img class="panel-img" :src="panel" alt="ICT Week talent availability dashboard" width="434" height="188" loading="lazy" />
@@ -72,10 +80,10 @@ const countdown = [
 
 .title {
   text-align: center;
-  font-size: 64px;
-  line-height: 80px;
+  font-size: 72px;
+  line-height: 84px;
   font-weight: 600;
-  letter-spacing: -1.5px;
+  letter-spacing: -2.16px;
 }
 
 .subtitle {
@@ -83,47 +91,99 @@ const countdown = [
 }
 
 .grid {
-  width: 1275px;
-  margin: 64px 0 0 85px;
+  width: 1280px;
+  margin: 48px 0 0 80px;
   display: grid;
-  grid-template-columns: 772px 480px;
-  justify-content: space-between;
+  grid-template-columns: 781px 483px;
+  gap: 16px;
 }
 
 .video {
   position: relative;
-  padding-top: 6px;
+  width: 781px;
+  height: 500px;
+  padding: 6px;
   border-radius: 24px;
   overflow: hidden;
-  background: #020205;
-}
-
-.video::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: linear-gradient(90deg, rgba(129, 199, 175, 0) 0%, #81c7af 30%, #f2ffff 50%, #81c7af 70%, rgba(129, 199, 175, 0) 100%);
+  background:
+    radial-gradient(ellipse 194px 124px at 49% 1%, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.1)),
+    radial-gradient(ellipse 302px 153px at 50% 0%, rgba(132, 255, 193, 0.7), rgba(132, 255, 193, 0));
+  -webkit-backdrop-filter: blur(24.982px);
+  backdrop-filter: blur(24.982px);
 }
 
 .video img {
-  width: 100%;
-  height: 100%;
+  width: 769px;
+  height: 488px;
+  border-radius: 17.1919px;
   object-fit: cover;
 }
 
+.play {
+  position: absolute;
+  top: 215.664px;
+  left: 356.386px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 68.7677px;
+  height: 68.7677px;
+  border-radius: 50%;
+}
+
+.play-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54.4411px;
+  height: 54.4411px;
+  border: 0.644697px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0));
+  -webkit-backdrop-filter: blur(3.87px);
+  backdrop-filter: blur(3.87px);
+}
+
+.play-core {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 37.2495px;
+  height: 37.2495px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #84ffc1 0%, #459b6f 100%);
+}
+
+.play svg {
+  display: block;
+}
+
+.play:hover .play-core,
+.play:focus-visible .play-core {
+  filter: brightness(1.08);
+}
+
+.play:focus-visible {
+  outline: 2px solid #84ffc1;
+  outline-offset: 3px;
+}
+
 .panel {
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 483px;
+  height: 500px;
   border-radius: 24px;
-  background: #050c11;
-  padding: 23px 23px 19px;
+  background: rgba(18, 27, 38, 0.3);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  padding: 24px;
 }
 
 .panel-img {
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  width: 435px;
+  height: 187px;
+  border-radius: 16px;
+  object-fit: cover;
 }
 
 .panel-photo {
@@ -133,24 +193,26 @@ const countdown = [
 }
 
 .panel-text {
-  margin-top: 19px;
-  font-size: 20px;
-  line-height: 26px;
+  margin-top: 16px;
+  font-size: 18px;
+  line-height: 24px;
   font-weight: 500;
 }
 
 .panel-actions {
   display: flex;
   gap: 16px;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .btn-solid {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  width: 178px;
   height: 52px;
-  padding: 0 24px;
+  padding: 0;
   border-radius: 12px;
   background: #84ffc1;
   color: #121b26;
@@ -161,9 +223,11 @@ const countdown = [
 .btn-line {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  width: 167px;
   height: 52px;
-  padding: 0 24px;
+  padding: 0;
   border-radius: 12px;
   border: 1px solid #84ffc1;
   color: #84ffc1;
@@ -173,33 +237,35 @@ const countdown = [
 
 .count {
   display: flex;
-  justify-content: space-between;
-  margin-top: 27px;
+  gap: 16px;
+  margin-top: 32px;
 }
 
 .count-card {
-  width: 133px;
+  width: 134.333px;
   height: 97px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  background: #0a121a;
+  border-radius: 16px;
+  border: 1px solid var(--glass-line);
+  background: rgba(18, 27, 38, 0.5);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
 .count-num {
-  font-size: 32px;
-  line-height: 1.1;
-  font-weight: 700;
+  font-size: 36px;
+  line-height: 43px;
+  font-weight: 600;
 }
 
 .count-label {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
   text-transform: uppercase;
   color: #84ffc1;
 }
@@ -222,14 +288,28 @@ const countdown = [
   }
 
   .video {
+    width: 100%;
+    height: auto;
     padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
   }
 
   .video img {
+    width: 100%;
     height: 335px;
   }
 
+  .play {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   .panel {
+    width: 100%;
+    height: auto;
     margin-top: 32px;
     padding: 20px 20px 12px;
   }
@@ -263,6 +343,7 @@ const countdown = [
 
   .btn-solid,
   .btn-line {
+    width: auto;
     height: 46px;
     padding: 0 20px;
     font-size: 15px;
@@ -274,6 +355,7 @@ const countdown = [
   }
 
   .count-card {
+    width: auto;
     flex: 1;
     height: 86px;
   }
@@ -372,6 +454,7 @@ const countdown = [
 
   .count-label {
     font-size: 10.5px;
+    line-height: normal;
   }
 }
 </style>

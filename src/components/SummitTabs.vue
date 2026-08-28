@@ -93,7 +93,12 @@ const data = () => content[active.value] || content.enterprise
       </div>
       <div class="body">
         <a href="#register" class="photo-card">
-          <img :src="summitCard" alt="Enterprise Uzbekistan Summit — legally protected testing environment for new business models and frontier technologies" width="420" height="368" loading="lazy" />
+          <img :src="summitCard" alt="" width="420" height="370" loading="lazy" />
+          <span class="photo-card-overlay">
+            <span class="photo-card-title">Enterprise Uzbekistan Summit</span>
+            <span class="photo-card-description">Legally protected testing environment for new business models and frontier technologies.</span>
+            <span class="photo-card-cta">Register now <span aria-hidden="true">→</span></span>
+          </span>
         </a>
         <img class="photo-plain" :src="summitPhoto" alt="Enterprise Uzbekistan Summit keynote at ICT Week" width="576" height="298" loading="lazy" />
         <div class="info">
@@ -141,31 +146,45 @@ const data = () => content[active.value] || content.enterprise
 }
 
 .panel {
-  width: 1275px;
-  margin-left: 85px;
-  padding: 40px 37px 28px;
-  border-radius: 28px;
-  background: #0a1c20;
+  width: 1280px;
+  height: 784px;
+  margin-left: 80px;
+  padding: 40px 40px 48px;
+  border-radius: 24px;
+  background: var(--glass-panel);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
 }
 
 .tabs {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .tab {
-  height: 46px;
-  padding: 0 24px;
-  border-radius: 23px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(10, 22, 24, 0.8);
+  flex: none;
+  height: 44px;
+  padding: 0;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.102);
+  background: rgba(255, 255, 255, 0.0314);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   color: #dfe4e4;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
+
+.tab:nth-child(1) { width: 258px; }
+.tab:nth-child(2) { width: 160px; }
+.tab:nth-child(3) { width: 217px; }
+.tab:nth-child(4) { width: 171px; }
+.tab:nth-child(5) { width: 121px; }
+.tab:nth-child(6) { width: 118px; }
 
 .tab.on {
   background: #84ffc1;
@@ -187,10 +206,12 @@ h2 {
   display: flex;
   align-items: center;
   margin-top: 36px;
-  height: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  background: #10191c;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.102);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.0314);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
 .meta-item {
@@ -200,30 +221,109 @@ h2 {
   justify-content: flex-start;
   gap: 10px;
   padding-left: 20px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .meta-item + .meta-item {
   border-left: 1px solid rgba(255, 255, 255, 0.12);
+  padding-left: 16px;
 }
 
 .body {
   display: flex;
   gap: 32px;
-  margin-top: 36px;
-  padding: 38px 34px 34px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  background: #0c161c;
+  height: 442px;
+  margin-top: 32px;
+  padding: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.102);
+  border-radius: 20px;
+  background:
+    radial-gradient(ellipse 54% 100% at 52% 0%, rgba(132, 255, 193, 0.08), transparent 100%),
+    linear-gradient(180deg, rgba(132, 255, 193, 0.02), rgba(132, 255, 193, 0.016)),
+    rgba(255, 255, 255, 0.0314);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
 
 .photo-card {
   flex: none;
+  position: relative;
+  display: block;
+  width: 420px;
+  height: 370px;
+  overflow: hidden;
+  border-radius: 12px;
+  color: #fff;
+  text-decoration: none;
 }
 
 .photo-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition:
+    transform 0.3s ease,
+    filter 0.3s ease;
+}
+
+.photo-card-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.photo-card-title {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 700;
+}
+
+.photo-card-description {
+  max-width: 350px;
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.photo-card-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-start;
+  min-width: 162px;
+  height: 46px;
+  margin-top: auto;
+  padding: 0 20px;
   border-radius: 12px;
+  background: #84ffc1;
+  color: #071710;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+
+.photo-card:hover img,
+.photo-card:focus-visible img {
+  filter: blur(5px);
+  transform: scale(1.04);
+}
+
+.photo-card:hover .photo-card-overlay,
+.photo-card:focus-visible .photo-card-overlay {
+  opacity: 1;
+}
+
+.photo-card:focus-visible {
+  outline: 2px solid #84ffc1;
+  outline-offset: 3px;
 }
 
 .photo-plain {
@@ -234,27 +334,30 @@ h2 {
 
 .info {
   flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .lead {
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 16px;
+  line-height: 24px;
   font-weight: 600;
 }
 
 ul {
   list-style: none;
-  margin-top: 24px;
+  margin-top: 48px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 28px;
 }
 
 li {
   display: flex;
   gap: 14px;
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 20px;
   color: #d7dcdc;
 }
 
@@ -263,31 +366,42 @@ li svg {
   margin-top: 2px;
 }
 
+li:nth-child(3) {
+  margin-top: -6px;
+}
+
 .ideal {
   display: flex;
-  gap: 14px;
-  margin-top: 26px;
-  padding: 16px 18px;
-  border: 1px solid rgba(132, 255, 193, 0.4);
-  border-radius: 10px;
-  background: rgba(10, 25, 22, 0.7);
+  align-items: center;
+  gap: 16px;
+  height: 78px;
+  margin-top: auto;
+  padding: 16px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background:
+    linear-gradient(#15272a, #15272a) padding-box,
+    linear-gradient(90deg, rgba(21, 91, 127, 0.5), rgba(27, 219, 134, 0.5)) border-box;
 }
 
 .ideal-bar {
   flex: none;
-  width: 3px;
+  width: 4px;
+  height: 28px;
   border-radius: 2px;
   background: #84ffc1;
 }
 
 .ideal em {
   font-style: normal;
-  color: #b5e6cd;
-  font-size: 17px;
+  color: #d7dcdc;
+  font-size: 16px;
+  line-height: 22px;
 }
 
 .ideal strong {
-  font-size: 17px;
+  font-size: 16px;
+  line-height: 22px;
 }
 
 @media (max-width: 1199px) {
@@ -311,6 +425,7 @@ li svg {
 
   .panel {
     width: calc(100% - 72px);
+    height: auto;
     margin: 0 auto;
     padding: 24px 16px 16px;
     border-radius: 20px;
@@ -334,6 +449,10 @@ li svg {
     font-size: 14px;
   }
 
+  .tab:nth-child(n) {
+    width: auto;
+  }
+
   h2 {
     margin-top: 20px;
     font-size: 36px;
@@ -353,6 +472,7 @@ li svg {
 
   .body {
     flex-direction: column;
+    height: auto;
     gap: 20px;
     margin-top: 22px;
     padding: 16px;
@@ -364,6 +484,8 @@ li svg {
   }
 
   .ideal {
+    height: auto;
+    min-height: 78px;
     margin-top: 16px;
   }
 
@@ -385,6 +507,10 @@ li svg {
   li {
     font-size: 15px;
     line-height: 23px;
+  }
+
+  li:nth-child(3) {
+    margin-top: 0;
   }
 }
 
@@ -413,6 +539,9 @@ li svg {
     width: 100%;
     border-radius: 0;
     background: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .tabs {

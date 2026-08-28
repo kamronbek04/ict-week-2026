@@ -1,7 +1,8 @@
 <script setup>
-import ministry from '../assets/logo-ministry.png'
-import itpark from '../assets/logo-itpark.png'
-import qrCard from '../assets/qr-card.png'
+import ministry from '../assets/logo-ministry.svg'
+import itpark from '../assets/logo-itpark.svg'
+import qrCode from '../assets/qr-card.svg'
+import startupBase from '../assets/startup-base.svg'
 
 const rows = [
   { num: '100%', text: 'Reimbursement for patenting and trademark registration' },
@@ -23,8 +24,8 @@ const rows = [
           <span class="band-bar"></span>
           <h2>DIGITAL STARTUPS PROGRAM</h2>
           <div class="band-logos">
-            <img :src="ministry" alt="Ministry of Digital Technologies of the Republic of Uzbekistan" width="145" height="42" loading="lazy" />
-            <img :src="itpark" alt="IT Park Uzbekistan" width="96" height="46" loading="lazy" />
+            <img :src="ministry" alt="Ministry of Digital Technologies of the Republic of Uzbekistan" width="123" height="32" loading="lazy" />
+            <img :src="itpark" alt="IT Park Uzbekistan" width="92" height="30" loading="lazy" />
           </div>
         </header>
         <div class="grid">
@@ -41,24 +42,24 @@ const rows = [
         </div>
         <div class="footer">
           <p class="pitch">
-            Digital Startups Program &ndash; a <strong>$50 million</strong> initiative, launched for promising Uzbek tech startups.
-            Funding, mentorship, intellectual property protection and access to the global market &ndash; all
-            available on one platform &ndash; <strong>startupbase.uz</strong>
+            Digital Startups Program a 50 million dollar initiative, launched for promising Uzbek tech startups.
+            Funding, mentorship, intellectual property protection and access to the global market all available on one platform startupbase.uz
           </p>
-          <a class="qr" href="https://startupbase.uz" target="_blank" rel="noopener">
-            <img :src="qrCard" alt="Startup Base — scan to open startupbase.uz" width="280" height="114" loading="lazy" />
+          <a class="qr" href="https://startupbase.uz" target="_blank" rel="noopener" aria-label="Open Startup Base">
+            <img class="startup-base-logo" :src="startupBase" alt="Startup Base" width="154" height="36" loading="lazy" />
+            <img class="qr-code" :src="qrCode" alt="" width="88" height="88" loading="lazy" />
           </a>
         </div>
       </div>
       <div class="pager">
         <button type="button" class="arrow" aria-label="Previous program">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <path d="M11 4l-5 5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
         <span class="pager-label">DIGITAL STARTUPS PROGRAM</span>
         <button type="button" class="arrow next" aria-label="Next program">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 18 18" fill="none" aria-hidden="true">
             <path d="M7 4l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
@@ -73,19 +74,41 @@ const rows = [
 }
 
 .panel {
-  width: 1275px;
-  margin-left: 85px;
-  padding: 36px 0 66px;
-  border-radius: 28px;
-  background: #0c2627;
+  width: 1280px;
+  margin-left: 80px;
+  padding: 36px;
+  border-radius: 24px;
+  background: var(--glass-panel);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
 }
 
 .board {
-  width: 1204px;
-  margin: 0 auto;
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 624px;
   border-radius: 16px;
   overflow: hidden;
-  background: linear-gradient(180deg, #0d1a24 0%, #0a141d 100%);
+  background:
+    linear-gradient(178deg, rgba(0, 0, 0, 0) 0%, rgba(32, 68, 118, 0.76) 100%),
+    radial-gradient(ellipse 72% 100% at 50% 100%, #0c1e5b 0%, #010101 100%);
+}
+
+.board::before {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='176' height='136' viewBox='0 0 176 136'%3E%3Cg fill='%23fff' fill-opacity='.09'%3E%3Cpath d='M44 0 84 20.5v41L44 82 4 61.5v-41L44 0Z'/%3E%3Cpath d='m132 0 40 20.5v41L132 82 92 61.5v-41L132 0Z'/%3E%3Cpath d='m88 68 40 20.5v41L88 150l-40-20.5v-41L88 68Z'/%3E%3C/g%3E%3C/svg%3E");
+  background-position: center bottom -6px;
+  content: '';
+  opacity: 0.36;
+}
+
+.board > * {
+  position: relative;
+  z-index: 1;
 }
 
 .band {
@@ -93,124 +116,174 @@ const rows = [
   display: flex;
   align-items: center;
   height: 58px;
-  padding: 0 20px 0 26px;
-  background: linear-gradient(90deg, #a4f4c5 0%, #7ed3a4 30%, #29564f 62%, rgba(12, 26, 32, 0.95) 88%);
+  padding: 0 24px;
+  background: linear-gradient(90deg, #84ffc1 0%, #84ffc1 41%, rgba(132, 255, 193, 0) 100%);
 }
 
 .band-bar {
-  width: 4px;
-  height: 26px;
-  border-radius: 2px;
-  background: #0b1a14;
+  flex: none;
+  width: 2px;
+  height: 22px;
+  border-radius: 1px;
+  background: #121b26;
 }
 
 .band h2 {
   margin-left: 14px;
   font-size: 24px;
-  letter-spacing: 0.04em;
+  line-height: 1;
+  letter-spacing: -0.025em;
   font-weight: 700;
-  color: #0b1a14;
+  color: #121b26;
 }
 
 .band-logos {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
   margin-left: auto;
+}
+
+.band-logos img {
+  flex: none;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  column-gap: 18px;
-  row-gap: 13px;
-  padding: 24px 26px 0;
+  gap: 12px;
+  padding: 28px 24px 0;
 }
 
 .row {
   display: flex;
   align-items: center;
-  gap: 22px;
-  min-height: 74px;
-  padding: 12px 18px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  background: #111e28;
+  gap: 33px;
+  height: 76px;
+  padding: 12px 28px;
+  border-radius: 16px;
+  background: rgba(18, 27, 38, 0.52);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    inset 0 0 0 1px var(--glass-line);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
 }
 
 .num {
   flex: none;
-  width: 90px;
-  font-size: 26px;
+  width: 88px;
+  font-size: 32px;
+  line-height: 1;
   font-weight: 700;
+  text-align: center;
   color: #84ffc1;
 }
 
 .num.icon {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .text {
-  font-size: 15px;
-  line-height: 22px;
-  color: #e2e7e7;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .footer {
   display: flex;
-  gap: 15px;
-  padding: 22px 26px 26px;
+  gap: 12px;
+  padding: 32px 24px 50px;
 }
 
 .pitch {
   flex: 1;
-  padding: 18px 22px;
-  border-radius: 12px;
-  background: linear-gradient(90deg, #a8dfc0 0%, #79b59d 45%, rgba(47, 90, 86, 0.9) 100%);
-  color: #0d1b19;
-  font-size: 16px;
-  line-height: 27px;
+  display: flex;
+  align-items: center;
+  height: 116px;
+  padding: 20px 26px;
+  border-radius: 18px;
+  background: linear-gradient(151deg, rgba(132, 255, 193, 0) 0%, rgba(132, 255, 193, 0.4) 100%);
+  color: #fff;
+  font-size: 18px;
+  line-height: 24px;
 }
 
 .qr {
   flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 285px;
+  height: 116px;
+  padding: 14px;
+  border-radius: 18px;
+  background: linear-gradient(100deg, rgba(132, 255, 193, 0) 0%, rgba(132, 255, 193, 0.4) 100%);
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-.qr img {
-  border-radius: 12px;
+.qr:hover,
+.qr:focus-visible {
+  box-shadow: inset 0 0 0 1px rgba(132, 255, 193, 0.55);
+  transform: translateY(-2px);
+}
+
+.qr:focus-visible {
+  outline: 2px solid #84ffc1;
+  outline-offset: 3px;
+}
+
+.startup-base-logo,
+.qr-code {
+  flex: none;
 }
 
 .pager {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 48px;
-  margin-top: 40px;
+  gap: 24px;
+  margin-top: 32px;
 }
 
 .arrow {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 74px;
-  height: 74px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  background: #0a141a;
-  color: #fff;
+  background: rgba(18, 27, 38, 0.78);
+  color: rgba(255, 255, 255, 0.52);
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
 .arrow.next {
-  background: #84ffc1;
+  background: rgba(132, 255, 193, 0.8);
   border-color: #84ffc1;
-  color: #0b1a14;
+  color: #121b26;
+}
+
+.arrow:hover,
+.arrow:focus-visible {
+  border-color: #84ffc1;
+  transform: translateY(-2px);
+}
+
+.arrow:focus-visible {
+  outline: 2px solid #84ffc1;
+  outline-offset: 3px;
 }
 
 .pager-label {
   font-size: 22px;
+  line-height: 1;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: -0.025em;
 }
 
 @media (max-width: 1199px) {
@@ -227,6 +300,8 @@ const rows = [
 
   .board {
     width: calc(100% - 40px);
+    min-height: 0;
+    margin: 0 auto;
     border-radius: 12px;
   }
 
@@ -245,7 +320,7 @@ const rows = [
   }
 
   .band-logos img {
-    height: 34px;
+    height: 26px;
     width: auto;
   }
 
@@ -256,6 +331,7 @@ const rows = [
 
   .row {
     gap: 14px;
+    height: auto;
     min-height: 108px;
     padding: 12px 14px;
   }
@@ -281,14 +357,28 @@ const rows = [
   }
 
   .pitch {
+    height: auto;
+    min-height: 104px;
     padding: 14px 16px;
     font-size: 14px;
     line-height: 22px;
   }
 
-  .qr img {
+  .qr {
     width: 236px;
     height: auto;
+    min-height: 104px;
+    padding: 10px;
+  }
+
+  .startup-base-logo {
+    width: 128px;
+    height: auto;
+  }
+
+  .qr-code {
+    width: 72px;
+    height: 72px;
   }
 
   .pager {
@@ -327,14 +417,18 @@ const rows = [
   }
 
   .band h2 {
-    font-size: 15px;
+    max-width: 120px;
+    font-size: 13px;
     line-height: 1.2;
-    max-width: 150px;
     text-align: left;
   }
 
   .band-logos img {
-    height: 28px;
+    height: 20px;
+  }
+
+  .band-logos {
+    gap: 8px;
   }
 
   .grid {
@@ -344,8 +438,8 @@ const rows = [
   }
 
   .row {
-    min-height: 60px;
-    padding: 8px 10px;
+    min-height: 76px;
+    padding: 10px 12px;
   }
 
   .num {
@@ -364,13 +458,24 @@ const rows = [
   }
 
   .pitch {
+    min-height: 0;
     font-size: 13.5px;
     line-height: 21px;
   }
 
-  .qr img {
+  .qr {
     width: 100%;
-    max-width: 280px;
+    min-height: 100px;
+    padding: 12px;
+  }
+
+  .startup-base-logo {
+    width: 154px;
+  }
+
+  .qr-code {
+    width: 76px;
+    height: 76px;
   }
 
   .pager {

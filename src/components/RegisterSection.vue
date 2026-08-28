@@ -98,11 +98,14 @@ const submit = () => {
 }
 
 .panel {
-  width: 1275px;
-  margin-left: 85px;
+  width: 1280px;
+  margin-left: 80px;
   padding: 98px 52px 24px;
-  border-radius: 28px;
-  background: #051315;
+  border-radius: 24px;
+  background: var(--glass-panel);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
 }
 
 h2 {
@@ -122,13 +125,15 @@ h2 {
 
 .form {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
   column-gap: 32px;
   row-gap: 14px;
   margin-top: 26px;
 }
 
 .field {
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -143,11 +148,16 @@ h2 {
 input[type='text'],
 input[type='email'],
 input[type='tel'] {
+  width: 100%;
+  min-width: 0;
   height: 46px;
   padding: 0 16px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 10px;
-  background: rgba(13, 24, 30, 0.85);
+  background: var(--glass-input);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
   color: #fff;
   font-size: 15px;
 }
@@ -287,6 +297,7 @@ input:focus-visible,
   }
 
   :deep(.control) {
+    width: 100%;
     height: 38px;
   }
 
@@ -318,6 +329,9 @@ input:focus-visible,
     padding: 28px 16px 22px;
     border-radius: 0;
     background: transparent;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   h2 {

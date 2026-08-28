@@ -1,16 +1,16 @@
 <script setup>
-import medal from '../assets/medal.png'
-import dealroom from '../assets/logo-dealroom.png'
-import startupblink from '../assets/logo-startupblink.png'
-import uzum from '../assets/logo-uzum.png'
-import tbc from '../assets/logo-tbc.png'
-import uniIcon from '../assets/uni-icon.png'
+import medal from '../assets/medal.webp'
+import dealroom from '../assets/logo-dealroom.svg'
+import startupblink from '../assets/logo-startupblink.svg'
+import uzum from '../assets/logo-uzum.svg'
+import tbc from '../assets/logo-tbc.svg'
+import uniIcon from '../assets/uni-icon.svg'
 </script>
 
 <template>
   <section class="stats">
     <div class="inner">
-      <img class="medal" :src="medal" alt="StartupBlink's Country of the Year award" width="130" height="172" loading="lazy" />
+      <img class="medal" :src="medal" alt="StartupBlink's Country of the Year award" width="150" height="150" loading="lazy" />
       <article class="card">
         <span class="tag">2026</span>
         <div class="col">
@@ -21,11 +21,11 @@ import uniIcon from '../assets/uni-icon.png'
           <strong>#1</strong>
           <span>In venture investment growth&ensp;globally</span>
         </div>
-        <img class="brand" :src="dealroom" alt="Dealroom.co" width="100" height="28" loading="lazy" />
+        <img class="brand" :src="dealroom" alt="Dealroom.co" width="92" height="22" loading="lazy" />
       </article>
       <article class="card">
         <span class="tag">2026</span>
-        <img class="medal-m" :src="medal" alt="" width="74" height="98" loading="lazy" />
+        <img class="medal-m" :src="medal" alt="medal of honor" width="48" height="48" loading="lazy" />
         <div class="col">
           <strong>#1</strong>
           <span>Ecosystem in the World by Growth Rate</span>
@@ -34,17 +34,20 @@ import uniIcon from '../assets/uni-icon.png'
           <strong>#1</strong>
           <span>Startup Hub in Central Asia (Tashkent)</span>
         </div>
-        <img class="brand" :src="startupblink" alt="StartupBlink" width="106" height="26" loading="lazy" />
+        <img class="brand" :src="startupblink" alt="StartupBlink" width="95" height="16" loading="lazy" />
       </article>
       <article class="card narrow">
         <span class="tag">2026</span>
         <div class="col">
-          <img :src="uniIcon" alt="2" width="66" height="40" loading="lazy" />
+          <div class="uni-header">
+            <strong>2</strong>
+            <img class="uni-icon" :src="uniIcon" alt="Fintech Unicorns" width="24" height="24" loading="lazy" />
+          </div>
           <span>Fintech Unicorns</span>
         </div>
         <div class="banks">
-          <img :src="uzum" alt="Uzum" width="108" height="36" loading="lazy" />
-          <img :src="tbc" alt="TBC Bank" width="114" height="34" loading="lazy" />
+          <img :src="uzum" alt="Uzum" width="90" height="24" loading="lazy" />
+          <img :src="tbc" alt="TBC Bank" width="97" height="24" loading="lazy" />
         </div>
       </article>
     </div>
@@ -57,51 +60,62 @@ import uniIcon from '../assets/uni-icon.png'
 }
 
 .inner {
-  width: 1275px;
-  margin-left: 85px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
   display: flex;
-  align-items: flex-start;
-  height: 209px;
-  padding: 18px 0 0 33px;
+  align-items: center;
+  height: 182px;
+  padding: 0 28px 0 23px;
   border-radius: 24px;
-  background: linear-gradient(90deg, #051d22 0%, #0b2b2f 100%);
+  background: var(--glass-panel);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
 }
 
 .medal {
   flex: none;
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin-right: 7px;
 }
 
 .card {
   position: relative;
   flex: none;
   display: flex;
-  width: 370px;
+  width: 371px;
   height: 108px;
-  margin: 22px 0 0 39px;
   padding: 8px 14px 10px 20px;
-  border: 1px solid rgba(102, 255, 198, 0.32);
-  border-radius: 12px;
-  background: linear-gradient(180deg, #0a1520 0%, #071019 100%);
+  border-radius: 10.34px;
+  background: rgba(3, 14, 18, 0.32);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 10.34px;
+  padding: 1.2px;
+  background: linear-gradient(90deg, #155B7F 0%, #1BDB86 100%);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
 
 .card + .card {
   margin-left: 24px;
 }
 
-.card:nth-of-type(1) {
-  background: #081118;
-}
-
-.card:nth-of-type(2) {
-  background: #0a1b21;
-}
-
-.card:nth-of-type(3) {
-  background: #0b2229;
-}
-
 .card.narrow {
-  width: 259px;
+  width: 256px;
 }
 
 .tag {
@@ -110,13 +124,15 @@ import uniIcon from '../assets/uni-icon.png'
   right: 0;
   display: flex;
   align-items: center;
-  height: 24px;
-  padding: 0 20px;
+  justify-content: center;
+  height: 25px;
+  padding: 0 16px;
   background: #84ffc1;
-  color: #0b1a14;
+  color: #121b26;
   font-size: 14px;
   font-weight: 700;
-  border-radius: 0 11px 0 10px;
+  border-radius: 0 9.14px 0 10px;
+  letter-spacing: 0.02em;
 }
 
 .col {
@@ -126,20 +142,29 @@ import uniIcon from '../assets/uni-icon.png'
 }
 
 .col strong {
-  font-size: 30px;
-  line-height: 38px;
+  font-size: 28px;
+  line-height: 34px;
   font-weight: 700;
+  color: #ffffff;
 }
 
-.col img {
-  margin-top: -2px;
+.uni-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.uni-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .col span {
-  margin-top: 3px;
+  margin-top: 4px;
   max-width: 96px;
-  font-size: 13px;
-  line-height: 17px;
+  font-size: 12px;
+  line-height: 15px;
   color: #ccd3d3;
 }
 
@@ -154,14 +179,24 @@ import uniIcon from '../assets/uni-icon.png'
   flex-direction: column;
   gap: 10px;
   align-items: flex-end;
-  margin: 22px 14px 0 auto;
+  margin: 20px 8px 0 auto;
+}
+
+.banks img:first-child {
+  width: 72px;
+  height: auto;
+}
+
+.banks img:last-child {
+  width: 78px;
+  height: auto;
 }
 
 .medal-m {
   display: none;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1299px) {
   .stats {
     margin-top: 68px;
   }
@@ -178,7 +213,8 @@ import uniIcon from '../assets/uni-icon.png'
 
   .medal {
     width: 96px;
-    height: auto;
+    height: 96px;
+    margin-right: 0;
   }
 
   .card,
@@ -214,6 +250,9 @@ import uniIcon from '../assets/uni-icon.png'
     gap: 14px;
     background: none;
     border-radius: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   .medal {

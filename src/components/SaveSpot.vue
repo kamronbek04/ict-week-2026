@@ -39,14 +39,17 @@ import photo from '../assets/save-photo.webp'
 }
 
 .panel {
-  width: 1275px;
-  margin-left: 85px;
+  width: 1280px;
+  margin-left: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 37px 35px 33px 37px;
-  border-radius: 28px;
-  background: #07151d;
+  border-radius: 24px;
+  background: var(--glass-panel);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
 }
 
 .copy {

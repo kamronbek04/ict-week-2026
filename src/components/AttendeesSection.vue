@@ -1,5 +1,5 @@
 <script setup>
-const cards = import.meta.glob('../assets/att-*.png', { eager: true, import: 'default' })
+const svgLogos = import.meta.glob('../assets/att-*.svg', { eager: true, import: 'default' })
 
 const main = [
   'websummit', 'plugandplay', 'mit', 'google-startups', 'aws',
@@ -9,16 +9,50 @@ const main = [
 const wide = ['gbtp', 'polyvalent', 'goldengate', 'sps']
 
 const names = {
-  websummit: 'Web Summit', plugandplay: 'Plug and Play', mit: 'Massachusetts Institute of Technology',
-  'google-startups': 'Google for Startups', aws: 'AWS', alchemist: 'Alchemist Accelerator',
-  dealroom: 'Dealroom.co', startupblink: 'StartupBlink', domino: 'Domino Ventures',
-  'startup-genome': 'Startup Genome', accesa: 'Accesa', sturgeon: 'Sturgeon Capital',
-  salesforce: 'Salesforce.org', ey: 'EY', gsa: 'Global Startup Awards', gbtp: 'GBTP Gyeongbuk Technopark',
-  polyvalent: 'Polyvalent', goldengate: 'Golden Gate Ventures', sps: 'SPS Commerce'
+  websummit: 'Web Summit',
+  plugandplay: 'Plug and Play',
+  mit: 'Massachusetts Institute of Technology',
+  'google-startups': 'Google for Startups',
+  aws: 'AWS',
+  alchemist: 'Alchemist Accelerator',
+  dealroom: 'Dealroom.co',
+  startupblink: 'StartupBlink',
+  domino: 'Domino Ventures',
+  'startup-genome': 'Startup Genome',
+  accesa: 'Accesa',
+  sturgeon: 'Sturgeon Capital',
+  salesforce: 'Salesforce.org',
+  ey: 'EY',
+  gsa: 'Global Startup Awards',
+  gbtp: 'GBTP Gyeongbuk Technopark',
+  polyvalent: 'Polyvalent',
+  goldengate: 'Golden Gate Ventures',
+  sps: 'SPS Commerce'
 }
 
-const src = (n) => cards[`../assets/att-${n}.png`]
-const tsrc = (n) => cards[`../assets/att-t-${n}.png`]
+const dimensions = {
+  accesa: { width: 144, height: 49 },
+  alchemist: { width: 168, height: 29 },
+  aws: { width: 96, height: 62 },
+  dealroom: { width: 152, height: 37 },
+  domino: { width: 144, height: 39 },
+  ey: { width: 80, height: 80 },
+  gbtp: { width: 188, height: 58 },
+  goldengate: { width: 188, height: 74 },
+  'google-startups': { width: 136, height: 20 },
+  gsa: { width: 124, height: 64 },
+  mit: { width: 152, height: 36 },
+  plugandplay: { width: 144, height: 28 },
+  polyvalent: { width: 196, height: 22 },
+  salesforce: { width: 144, height: 67 },
+  sps: { width: 196, height: 54 },
+  'startup-genome': { width: 152, height: 41 },
+  startupblink: { width: 160, height: 27 },
+  sturgeon: { width: 144, height: 52 },
+  websummit: { width: 136, height: 68 }
+}
+
+const getSvg = (id) => svgLogos[`../assets/att-${id}.svg`]
 </script>
 
 <template>
@@ -26,16 +60,26 @@ const tsrc = (n) => cards[`../assets/att-t-${n}.png`]
     <div class="panel">
       <h2>Past Attendees Include</h2>
       <div class="grid main">
-        <picture v-for="n in main" :key="n">
-          <source media="(min-width: 600px) and (max-width: 1199px)" :srcset="tsrc(n)" />
-          <img :src="src(n)" :alt="names[n]" width="208" height="120" loading="lazy" />
-        </picture>
+        <div v-for="id in main" :key="id" class="card" :class="id">
+          <img
+            :src="getSvg(id)"
+            :alt="names[id]"
+            :width="dimensions[id]?.width"
+            :height="dimensions[id]?.height"
+            loading="lazy"
+          />
+        </div>
       </div>
       <div class="grid wide">
-        <picture v-for="n in wide" :key="n">
-          <source media="(min-width: 600px) and (max-width: 1199px)" :srcset="tsrc(n)" />
-          <img :src="src(n)" :alt="names[n]" width="268" height="120" loading="lazy" />
-        </picture>
+        <div v-for="id in wide" :key="id" class="card wide" :class="id">
+          <img
+            :src="getSvg(id)"
+            :alt="names[id]"
+            :width="dimensions[id]?.width"
+            :height="dimensions[id]?.height"
+            loading="lazy"
+          />
+        </div>
       </div>
     </div>
   </section>
@@ -47,123 +91,190 @@ const tsrc = (n) => cards[`../assets/att-t-${n}.png`]
 }
 
 .panel {
-  width: 1275px;
-  margin-left: 85px;
-  padding: 30px 0 54px;
-  border-radius: 28px;
-  background: #0b1e21;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 48px 56px 56px;
+  border-radius: 24px;
+  background: var(--glass-panel);
+  box-shadow: var(--glass-shadow);
+  -webkit-backdrop-filter: var(--glass-filter);
+  backdrop-filter: var(--glass-filter);
+  box-sizing: border-box;
 }
 
 h2 {
   text-align: center;
-  font-size: 44px;
+  font-size: 40px;
   font-weight: 600;
+  color: #ededf2;
   letter-spacing: -0.5px;
+  margin: 0 0 48px;
 }
 
 .grid {
   display: grid;
   gap: 32px;
-  width: 1168px;
-  margin: 32px 0 0 51px;
-}
-
-.grid picture {
-  display: contents;
-}
-
-.grid source {
-  display: none;
+  justify-content: center;
 }
 
 .grid.main {
-  grid-template-columns: repeat(5, 1fr);
-  margin-top: 60px;
+  grid-template-columns: repeat(5, 208px);
 }
 
 .grid.wide {
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 268px);
+  margin-top: 32px;
 }
 
-.grid img {
-  width: 100%;
+.card {
+  width: 208px;
+  height: 120px;
+  border-radius: 12px;
+  background: var(--glass-card);
+  border: 1px solid var(--glass-line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 22px;
+  box-sizing: border-box;
+  transition: transform 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card.wide {
+  width: 268px;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(27, 219, 134, 0.4);
+  background: rgba(27, 219, 134, 0.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.card img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
   height: auto;
-  border-radius: 14px;
+  object-fit: contain;
+  transition: transform 0.25s ease;
 }
 
-@media (max-width: 1199px) {
+.card:hover img {
+  transform: scale(1.03);
+}
+
+@media (max-width: 1279px) {
   .attendees {
-    margin-top: 20px;
+    margin-top: 48px;
   }
 
   .panel {
-    width: calc(100% - 72px);
+    width: calc(100% - 48px);
     margin: 0 auto;
-    padding: 30px 14px 20px;
+    padding: 36px 24px;
     border-radius: 20px;
   }
 
   h2 {
     font-size: 34px;
+    margin-bottom: 32px;
   }
 
   .grid {
-    width: 100%;
-    margin: 12px 0 0;
-    gap: 12px;
-  }
-
-  .grid img {
-    object-fit: cover;
-  }
-
-  .grid.main img {
-    aspect-ratio: 113 / 100;
-  }
-
-  .grid.wide img {
-    aspect-ratio: 145 / 100;
+    gap: 16px;
   }
 
   .grid.main {
-    margin-top: 21px;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .grid.wide {
+    grid-template-columns: repeat(4, 1fr);
+    margin-top: 16px;
+  }
+
+  .card,
+  .card.wide {
+    width: auto;
+    height: 100px;
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 899px) {
+  .attendees {
+    margin-top: 36px;
+  }
+
+  .panel {
+    width: calc(100% - 32px);
+    padding: 28px 16px;
+    border-radius: 18px;
+  }
+
+  h2 {
+    font-size: 28px;
+    margin-bottom: 24px;
+  }
+
+  .grid {
+    gap: 12px;
+  }
+
+  .grid.main {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .grid.wide {
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 12px;
+  }
+
+  .card,
+  .card.wide {
+    height: 90px;
+    padding: 10px 12px;
   }
 }
 
 @media (max-width: 599px) {
   .attendees {
-    margin-top: 36px;
-  }
-
-  .grid.main img {
-    aspect-ratio: 208 / 120;
-  }
-
-  .grid.wide img {
-    aspect-ratio: 268 / 120;
+    margin-top: 28px;
   }
 
   .panel {
-    width: calc(100% - 32px);
-    padding: 22px 12px 24px;
+    width: calc(100% - 24px);
+    padding: 24px 12px;
     border-radius: 16px;
   }
 
   h2 {
-    font-size: 24px;
+    font-size: 22px;
+    margin-bottom: 18px;
   }
 
   .grid {
-    gap: 10px;
+    gap: 8px;
   }
 
   .grid.main {
-    grid-template-columns: repeat(3, 1fr);
-    margin-top: 22px;
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .grid.wide {
     grid-template-columns: repeat(2, 1fr);
+    margin-top: 8px;
+  }
+
+  .card,
+  .card.wide {
+    height: 76px;
+    padding: 8px 10px;
   }
 }
 </style>
